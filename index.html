@@ -377,6 +377,72 @@
       --book-spine: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.08) 4%, transparent 12%);
     }
 
+    /* Vibrant Theme Accents when in Dark Mode */
+    html[data-mode="dark"][data-theme="forest-reading"] {
+      --accent-primary: #52B788;
+      --accent-hover: #74C69D;
+      --accent-soft: rgba(82, 183, 136, 0.18);
+    }
+    html[data-mode="dark"][data-theme="ocean-ink"] {
+      --accent-primary: #4EA8DE;
+      --accent-hover: #56CFE1;
+      --accent-soft: rgba(78, 168, 222, 0.18);
+    }
+    html[data-mode="dark"][data-theme="rosewood"] {
+      --accent-primary: #F2849E;
+      --accent-hover: #F6A5B9;
+      --accent-soft: rgba(242, 132, 158, 0.18);
+    }
+    html[data-mode="dark"][data-theme="autumn-library"] {
+      --accent-primary: #F4A261;
+      --accent-hover: #E76F51;
+      --accent-soft: rgba(244, 162, 97, 0.18);
+    }
+    html[data-mode="dark"][data-theme="lavender-pages"] {
+      --accent-primary: #B388EB;
+      --accent-hover: #C9A7F5;
+      --accent-soft: rgba(179, 136, 235, 0.18);
+    }
+    html[data-mode="dark"][data-theme="espresso-paper"] {
+      --accent-primary: #D4A373;
+      --accent-hover: #E6BE94;
+      --accent-soft: rgba(212, 163, 115, 0.18);
+    }
+    html[data-mode="dark"][data-theme="sage-linen"] {
+      --accent-primary: #81B29A;
+      --accent-hover: #A3C9B5;
+      --accent-soft: rgba(129, 178, 154, 0.18);
+    }
+    html[data-mode="dark"][data-theme="vintage-bookshop"] {
+      --accent-primary: #E5989B;
+      --accent-hover: #B5838D;
+      --accent-soft: rgba(229, 152, 155, 0.18);
+    }
+    html[data-mode="dark"][data-theme="sunset-reading"] {
+      --accent-primary: #F77F00;
+      --accent-hover: #FCBF49;
+      --accent-soft: rgba(247, 127, 0, 0.18);
+    }
+    html[data-mode="dark"][data-theme="minimal-monochrome"] {
+      --accent-primary: #E9ECEF;
+      --accent-hover: #FFFFFF;
+      --accent-soft: rgba(233, 236, 239, 0.18);
+    }
+    html[data-mode="dark"][data-theme="editorial-cream"] {
+      --accent-primary: #E08761;
+      --accent-hover: #F09873;
+      --accent-soft: rgba(224, 135, 97, 0.18);
+    }
+
+    /* Zero-Flicker Transition Freeze Class (Prevents visual strobe/lag during theme & mode changes) */
+    html.theme-switching,
+    html.theme-switching *,
+    html.theme-switching *::before,
+    html.theme-switching *::after {
+      transition: none !important;
+      animation-duration: 0s !important;
+    }
+
     /* ==========================================================================
        2. BASE & RESET STYLES
        ========================================================================== */
@@ -1331,6 +1397,177 @@
       margin-top: 10px;
     }
 
+    /* Reading Activity Screen Styles */
+    .activity-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .activity-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .activity-matrix-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .activity-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .activity-matrix-wrapper {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .activity-weekday-labels {
+      display: grid;
+      grid-template-rows: repeat(7, 15px);
+      gap: 5px;
+      font-size: 10px;
+      color: var(--text-faint);
+      font-weight: 600;
+      padding-top: 1px;
+      user-select: none;
+    }
+
+    .activity-grid-days {
+      display: grid;
+      grid-template-rows: repeat(7, 15px);
+      grid-auto-flow: column;
+      grid-auto-columns: 15px;
+      gap: 5px;
+    }
+
+    .activity-cell {
+      width: 15px;
+      height: 15px;
+      border-radius: 4px;
+      background-color: var(--bg-input);
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .activity-cell:hover {
+      transform: scale(1.35);
+      z-index: 10;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .activity-cell.is-future {
+      opacity: 0.2;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .activity-cell.lvl-0 { background-color: var(--bg-input); }
+    .activity-cell.lvl-1 { background-color: rgba(200, 109, 86, 0.35); }
+    .activity-cell.lvl-2 { background-color: rgba(200, 109, 86, 0.6); }
+    .activity-cell.lvl-3 { background-color: rgba(200, 109, 86, 0.85); }
+    .activity-cell.lvl-4 { background-color: var(--accent-primary); }
+
+    .activity-two-col-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+    }
+
+    .rhythm-chart-bars {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      height: 160px;
+      padding-top: 20px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .rhythm-bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .rhythm-bar-fill {
+      width: 100%;
+      max-width: 32px;
+      background: var(--accent-primary);
+      border-radius: 6px 6px 0 0;
+      transition: height 0.4s ease;
+      position: relative;
+    }
+
+    .rhythm-bar-fill:hover {
+      filter: brightness(1.1);
+    }
+
+    .rhythm-bar-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .rhythm-bar-val {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .session-timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 480px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .session-timeline-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      transition: var(--transition-smooth);
+    }
+
+    .session-timeline-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    @media (max-width: 900px) {
+      .activity-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .activity-two-col-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Section Headers & Filter Controls */
     .shelf-header {
       display: flex;
@@ -1902,8 +2139,8 @@
     /* Theme Picker Grid */
     .themes-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+      gap: 14px;
       margin-top: 14px;
     }
 
@@ -1917,12 +2154,21 @@
       cursor: pointer;
       text-align: left;
       background: var(--bg-surface);
-      transition: var(--transition-smooth);
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .theme-card-btn:hover {
-      border-color: var(--border-strong);
-      transform: translateY(-2px);
+    @media (hover: hover) {
+      .theme-card-btn:hover {
+        border-color: var(--border-strong);
+        transform: translateY(-2px);
+      }
+    }
+
+    .theme-card-btn:active {
+      transform: scale(0.98);
     }
 
     .theme-card-btn.active {
@@ -1938,6 +2184,41 @@
     }
 
     .theme-swatches span { flex: 1; height: 100%; }
+
+    .mode-pill-btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 2px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      background-color: var(--bg-surface);
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 13.5px;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+    }
+    @media (hover: hover) {
+      .mode-pill-btn:hover {
+        border-color: var(--border-strong);
+        background-color: var(--bg-input);
+      }
+    }
+    .mode-pill-btn:active {
+      transform: scale(0.98);
+    }
+    .mode-pill-btn.active {
+      border-color: var(--accent-primary);
+      background-color: var(--accent-soft);
+      color: var(--accent-primary);
+      font-weight: 700;
+    }
 
     /* ==========================================================================
        8. MODAL SYSTEM & FORMS
@@ -2095,32 +2376,91 @@
       background-color: #B20320;
     }
 
-    /* Google Books Search Box in Modal */
+    /* Google Books & eBooks Quick Lookup in Modal */
     .google-search-bar {
       display: flex;
       gap: 8px;
+      align-items: center;
+    }
+    .google-search-bar .form-input {
+      flex: 1;
+    }
+    .chip-tag {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 3px 10px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      display: inline-flex;
+      align-items: center;
+      line-height: 1.2;
+    }
+    .chip-tag:hover {
+      background: var(--color-accent);
+      color: #fff;
+      border-color: var(--color-accent);
     }
     .google-results-list {
-      max-height: 240px;
+      max-height: 290px;
       overflow-y: auto;
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
       margin-top: 10px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      padding: 8px;
+      gap: 8px;
+      padding: 10px;
+      background: var(--bg-surface);
     }
     .google-item-card {
       display: flex;
       gap: 12px;
-      padding: 8px;
+      padding: 10px;
       border-radius: var(--radius-sm);
-      cursor: pointer;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
       transition: var(--transition-smooth);
+      align-items: flex-start;
+      cursor: pointer;
     }
     .google-item-card:hover {
       background-color: var(--bg-card-subtle);
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-sm);
+    }
+    .ebook-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      font-size: 10.5px;
+      font-weight: 700;
+      background: rgba(37, 99, 235, 0.12);
+      color: #2563EB;
+      border: 1px solid rgba(37, 99, 235, 0.25);
+    }
+    [data-mode="dark"] .ebook-pill {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60A5FA;
+      border-color: rgba(59, 130, 246, 0.35);
+    }
+    .genre-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      font-size: 10.5px;
+      font-weight: 600;
+      background: var(--bg-card-subtle);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     /* Toast System */
@@ -2360,6 +2700,14 @@
           </button>
         </li>
         <li>
+          <button class="nav-item-btn" data-view="activity">
+            <!-- Activity Waveform Icon -->
+            <svg class="icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+            <span>Activity</span>
+            <span class="nav-badge" id="sidebarStreakBadge" style="background: rgba(200, 109, 86, 0.15); color: var(--accent-primary); font-weight: 700;">12d 🔥</span>
+          </button>
+        </li>
+        <li>
           <button class="nav-item-btn" data-view="quotes">
             <!-- Quote Icon -->
             <svg class="icon" viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path></svg>
@@ -2542,30 +2890,6 @@
           </div>
         </div>
 
-        <!-- 13-Week Reading Activity Heatmap -->
-        <div class="heatmap-section">
-          <div class="heatmap-header">
-            <div>
-              <h3 style="font-family: var(--font-serif); font-size: 18px; font-weight: 700;">Reading Activity</h3>
-              <p class="heatmap-stats" id="heatmapStatsSummary">13-week active reading streak: <strong id="dashStreakVal">12 days</strong> 🔥</p>
-            </div>
-            <div class="heatmap-legend">
-              <span>Less</span>
-              <div class="heatmap-cell cell-lvl-0"></div>
-              <div class="heatmap-cell cell-lvl-1"></div>
-              <div class="heatmap-cell cell-lvl-2"></div>
-              <div class="heatmap-cell cell-lvl-3"></div>
-              <div class="heatmap-cell cell-lvl-4"></div>
-              <span>More</span>
-            </div>
-          </div>
-          <div class="heatmap-grid-wrap">
-            <div class="heatmap-grid" id="dashboardHeatmapGrid">
-              <!-- Dynamically Rendered 13 columns x 7 days -->
-            </div>
-          </div>
-        </div>
-
         <!-- My Library Shelf Section -->
         <div class="shelf-section">
           <div class="shelf-header">
@@ -2615,6 +2939,7 @@
             <button class="icon-btn" id="libViewListBtn" title="List View">
               <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
             </button>
+            <button class="btn-secondary" id="libQuickLookupBtn" style="padding: 8px 14px; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;" title="Quick lookup with Google Books & eBooks">⚡ Quick Lookup</button>
             <button class="btn-primary" id="libAddBookBtn" style="padding: 8px 16px; font-size: 13px;">+ Add Book</button>
           </div>
         </div>
@@ -2741,7 +3066,152 @@
       </section>
 
       <!-- ==========================================================================
-           PAGE 7: QUOTES & HIGHLIGHTS
+           PAGE 7: READING ACTIVITY & HABITS
+           ========================================================================== -->
+      <section class="view-content" id="view-activity">
+        <div class="page-title-banner">
+          <div>
+            <h2>Reading Activity & Habits</h2>
+            <p>Visual tracker of your daily reading consistency, streaks, session durations, and velocity.</p>
+          </div>
+          <button class="btn-primary" id="actLogSessionBtn">+ Log Reading Session</button>
+        </div>
+
+        <div class="activity-container">
+          <!-- 4 Activity Overview KPIs -->
+          <div class="activity-kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap kpi-icon-coral">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+              </div>
+              <div class="kpi-info">
+                <div class="kpi-num" id="actStreakNum">12 Days</div>
+                <div class="kpi-label">Active Streak 🔥</div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap kpi-icon-green">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              </div>
+              <div class="kpi-info">
+                <div class="kpi-num" id="actActiveDaysNum">26 / 91</div>
+                <div class="kpi-label">Active Days (13 Wk)</div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap kpi-icon-blue">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              </div>
+              <div class="kpi-info">
+                <div class="kpi-num" id="actTotalPagesNum">1,175</div>
+                <div class="kpi-label">Pages Logged</div>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-icon-wrap kpi-icon-gold">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <div class="kpi-info">
+                <div class="kpi-num" id="actTotalTimeNum">23.5 hrs</div>
+                <div class="kpi-label">Total Time Read</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Activity Heatmap Matrix Card -->
+          <div class="activity-matrix-card">
+            <div class="activity-controls-bar">
+              <div>
+                <h3 style="font-family: var(--font-serif); font-size: 19px; font-weight: 700; margin-bottom: 4px;">Daily Reading Matrix</h3>
+                <p class="heatmap-stats" id="actHeatmapStatsSummary" style="font-size: 13px; color: var(--text-muted);"></p>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                <!-- Time Range Selector -->
+                <div class="filter-pills-row" id="actRangePills">
+                  <button class="pill-btn active" id="actRange91" data-range="91">13 Weeks</button>
+                  <button class="pill-btn" id="actRange180" data-range="180">6 Months</button>
+                  <button class="pill-btn" id="actRangeYear" data-range="365">2026 Year</button>
+                </div>
+
+                <!-- Metric Selector -->
+                <div class="filter-pills-row" id="actMetricPills">
+                  <button class="pill-btn active" id="actMetricPages" data-metric="pages">Pages</button>
+                  <button class="pill-btn" id="actMetricMinutes" data-metric="minutes">Minutes</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="activity-matrix-wrapper">
+              <div class="activity-weekday-labels">
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+              </div>
+              <div class="activity-grid-days" id="activityHeatmapGrid">
+                <!-- Dynamically populated activity cells -->
+              </div>
+            </div>
+
+            <div class="heatmap-legend" id="activityHeatmapLegend" style="margin-top: 14px;">
+              <span>Less</span>
+              <div class="activity-cell lvl-0" style="cursor: default;"></div>
+              <div class="activity-cell lvl-1" style="cursor: default;"></div>
+              <div class="activity-cell lvl-2" style="cursor: default;"></div>
+              <div class="activity-cell lvl-3" style="cursor: default;"></div>
+              <div class="activity-cell lvl-4" style="cursor: default;"></div>
+              <span>More Active</span>
+            </div>
+          </div>
+
+          <!-- Two-Column Responsive Grid: Weekly Rhythm & Habit Insights -->
+          <div class="activity-two-col-grid">
+            <!-- Weekly Rhythm -->
+            <div class="card-panel">
+              <div class="card-panel-title">
+                <span>Weekly Reading Rhythm</span>
+                <span style="font-size: 11.5px; color: var(--text-muted);" id="actPeakDayText">Peak: Saturday</span>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Reading volume distribution across days of the week.</p>
+              <div class="rhythm-chart-bars" id="actWeeklyRhythmChart">
+                <!-- Dynamically rendered day-of-week bars -->
+              </div>
+            </div>
+
+            <!-- Reading Habit Insights -->
+            <div class="card-panel">
+              <div class="card-panel-title">
+                <span>Reading Pace & Habit Insights</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;" id="actHabitsInsights">
+                <!-- Dynamically rendered insights -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Chronological Reading Sessions Log -->
+          <div class="card-panel">
+            <div class="card-panel-title">
+              <span>Logged Reading Sessions History</span>
+              <span class="status-badge status-reading" id="actSessionsCount">0 sessions</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Complete timeline of tracked reading sessions with pages read and reading duration.</p>
+            <div class="session-timeline-list" id="activitySessionsList">
+              <!-- Dynamically rendered session cards -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           PAGE 8: QUOTES & HIGHLIGHTS
            ========================================================================== -->
       <section class="view-content" id="view-quotes">
         <div class="page-title-banner">
@@ -2969,6 +3439,22 @@
           </div>
         </div>
 
+        <!-- Display Mode Preference -->
+        <div class="card-panel" style="margin-bottom: 24px;">
+          <h4 style="font-size: 17px; font-weight: 700; font-family: var(--font-serif); margin-bottom: 8px;">Display Mode</h4>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Toggle between crisp editorial light mode and comfortable low-glare dark mode.</p>
+          <div style="display: flex; gap: 12px; max-width: 360px;">
+            <button type="button" id="settingsModeLightBtn" class="mode-pill-btn active">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+              <span>Light Mode</span>
+            </button>
+            <button type="button" id="settingsModeDarkBtn" class="mode-pill-btn">
+              <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+              <span>Dark Mode</span>
+            </button>
+          </div>
+        </div>
+
         <div class="card-panel" style="margin-bottom: 24px;">
           <h4 style="font-size: 17px; font-weight: 700; font-family: var(--font-serif); margin-bottom: 10px;">Select Visual Theme (12 Themes)</h4>
           <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Each theme changes the complete design system including surfaces, accents, typography, and charts.</p>
@@ -3064,18 +3550,38 @@
         <button class="icon-btn" id="closeBookModalBtn" aria-label="Close modal">✕</button>
       </div>
       <div class="modal-body">
-        <!-- Optional Google Books Lookup -->
-        <div class="card-panel" style="background: var(--bg-card-subtle); padding: 14px; margin-bottom: 8px;">
-          <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; display: block;">Quick Lookup (Google Books)</label>
+        <!-- Google Books & eBooks Quick Lookup -->
+        <div class="card-panel" style="background: var(--bg-card-subtle); padding: 14px; margin-bottom: 12px; border: 1px solid var(--border-subtle);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 6px;">
+            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; gap: 6px; margin-bottom: 0;">
+              <span>⚡ Quick Lookup — Google Books & eBooks</span>
+            </label>
+            <div class="lookup-filter-pills" id="googleLookupFilterPills" style="display: flex; gap: 4px;">
+              <button type="button" class="pill-btn active" id="lookupFilterAllBtn" data-filter="all" style="padding: 2px 10px; font-size: 11px;">All Books</button>
+              <button type="button" class="pill-btn" id="lookupFilterEbookBtn" data-filter="ebooks" style="padding: 2px 10px; font-size: 11px;">📱 eBooks Only</button>
+            </div>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">Instantly search by title, author, or ISBN to auto-fill book metadata, high-res covers, page counts, and Google eBook reader previews.</p>
           <div class="google-search-bar">
-            <input type="text" class="form-input" id="googleSearchInput" placeholder="Search by title, author, or ISBN...">
-            <button class="btn-secondary" id="googleSearchBtn">Search</button>
+            <input type="text" class="form-input" id="googleSearchInput" placeholder="Search title, author, or ISBN (e.g. Dune, Fourth Wing)..." autocomplete="off">
+            <button type="button" class="btn-secondary" id="googleSearchBtn" style="white-space: nowrap;">Search</button>
+            <button type="button" class="icon-btn" id="googleClearSearchBtn" title="Clear search" style="display: none; height: 38px; width: 38px;">✕</button>
+          </div>
+          <!-- Quick sample chips -->
+          <div class="lookup-quick-chips" id="googleQuickChips" style="display: flex; gap: 6px; align-items: center; margin-top: 8px; flex-wrap: wrap;">
+            <span style="font-size: 11px; color: var(--text-muted);">Try:</span>
+            <button type="button" class="chip-tag" onclick="App.quickChipSearch('Dune')">Dune</button>
+            <button type="button" class="chip-tag" onclick="App.quickChipSearch('Fourth Wing')">Fourth Wing</button>
+            <button type="button" class="chip-tag" onclick="App.quickChipSearch('Atomic Habits')">Atomic Habits</button>
+            <button type="button" class="chip-tag" onclick="App.quickChipSearch('1984')">1984</button>
+            <button type="button" class="chip-tag" onclick="App.quickChipSearch('The Hobbit')">The Hobbit</button>
           </div>
           <div class="google-results-list" id="googleResultsContainer" style="display: none;"></div>
         </div>
 
         <form id="bookForm">
           <input type="hidden" id="formBookId">
+          <input type="hidden" id="bookFormEbookUrl">
           <div class="form-row-2">
             <div class="form-group">
               <label for="bookFormTitle">Title *</label>
@@ -3854,6 +4360,8 @@
       journal: [],
       sessions: [],
       calendarDate: new Date(),
+      activityRange: 91,
+      activityMetric: 'pages',
       settings: {
         userName: 'Sarah',
         annualGoal: 50,
@@ -3865,6 +4373,8 @@
       currentSort: 'recent',
       activeView: 'home',
       activeBookDetailId: null,
+      lookupEbooksOnly: false,
+      lastGoogleSearchResults: [],
 
       init(data) {
         this.books = data.books || [];
@@ -4088,6 +4598,35 @@
         return map;
       },
 
+      getWeeklyDayDistribution() {
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const pageCounts = [0, 0, 0, 0, 0, 0, 0];
+        const sessionCounts = [0, 0, 0, 0, 0, 0, 0];
+
+        (AppState.sessions || []).forEach(s => {
+          if (!s.date) return;
+          const parts = s.date.split('-');
+          const dow = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10)).getDay();
+          pageCounts[dow] += (s.pagesRead || 0);
+          sessionCounts[dow] += 1;
+        });
+
+        const maxPages = Math.max(1, ...pageCounts);
+        let peakIdx = 0;
+        pageCounts.forEach((p, idx) => {
+          if (p > pageCounts[peakIdx]) peakIdx = idx;
+        });
+
+        return {
+          days,
+          pageCounts,
+          sessionCounts,
+          maxPages,
+          peakDay: days[peakIdx],
+          peakPages: pageCounts[peakIdx]
+        };
+      },
+
       getInsights() {
         const genres = this.getGenreCounts();
         let topGenre = 'None';
@@ -4213,6 +4752,350 @@
     };
 
     /* --------------------------------------------------------------------------
+       5.1 GOOGLE BOOKS & EBOOKS LOOKUP SERVICE (Dual Engine + Instant Fallback)
+       -------------------------------------------------------------------------- */
+    const BookLookupService = {
+      // Curated Instant Catalog for popular & classic titles
+      instantCatalog: [
+        {
+          title: "Dune",
+          author: "Frank Herbert",
+          pages: 896,
+          genre: "Science Fiction",
+          format: "eBook",
+          isEbook: true,
+          cover: "https://covers.openlibrary.org/b/id/11481354-M.jpg",
+          rating: 5,
+          publishedYear: "1965",
+          series: "Dune Chronicles",
+          seriesNo: 1,
+          ebookUrl: "https://books.google.com/books?id=B1hSG45JCX4C",
+          previewLink: "https://books.google.com/books?id=B1hSG45JCX4C",
+          description: "Set on the desert planet Arrakis, Dune is the story of Paul Atreides, heir to a noble family tasked with ruling an inhospitable world where the only thing of value is the 'spice' melange."
+        },
+        {
+          title: "Fourth Wing",
+          author: "Rebecca Yarros",
+          pages: 528,
+          genre: "Fantasy",
+          format: "eBook",
+          isEbook: true,
+          cover: "https://covers.openlibrary.org/b/id/13444820-M.jpg",
+          rating: 4.5,
+          publishedYear: "2023",
+          series: "The Empyrean",
+          seriesNo: 1,
+          ebookUrl: "https://books.google.com/books?id=0j-bEAAAQBAJ",
+          previewLink: "https://books.google.com/books?id=0j-bEAAAQBAJ",
+          description: "Enter the brutal and elite world of a war college for dragon riders from USA Today bestselling author Rebecca Yarros. Twenty-year-old Violet Sorrengail was supposed to enter the Scribe Quadrant."
+        },
+        {
+          title: "Atomic Habits",
+          author: "James Clear",
+          pages: 320,
+          genre: "Self-Help",
+          format: "eBook",
+          isEbook: true,
+          cover: "https://covers.openlibrary.org/b/id/12843449-M.jpg",
+          rating: 5,
+          publishedYear: "2018",
+          ebookUrl: "https://books.google.com/books?id=fFCjDQAAQBAJ",
+          previewLink: "https://books.google.com/books?id=fFCjDQAAQBAJ",
+          description: "No matter your goals, Atomic Habits offers a proven framework for improving every day. James Clear reveals practical strategies to form good habits and break bad ones."
+        },
+        {
+          title: "1984",
+          author: "George Orwell",
+          pages: 328,
+          genre: "Classic",
+          format: "eBook",
+          isEbook: true,
+          cover: "https://covers.openlibrary.org/b/id/8575708-M.jpg",
+          rating: 4.5,
+          publishedYear: "1949",
+          ebookUrl: "https://books.google.com/books?id=kotPYEqx7kMC",
+          previewLink: "https://books.google.com/books?id=kotPYEqx7kMC",
+          description: "Winston Smith toils in the Ministry of Truth, rewriting history for the Party. In a world where Big Brother is always watching, Winston dares to commit thoughtcrime."
+        },
+        {
+          title: "The Hobbit",
+          author: "J.R.R. Tolkien",
+          pages: 310,
+          genre: "Fantasy",
+          format: "eBook",
+          isEbook: true,
+          cover: "https://covers.openlibrary.org/b/id/12003526-M.jpg",
+          rating: 5,
+          publishedYear: "1937",
+          series: "The Lord of the Rings",
+          seriesNo: 0,
+          ebookUrl: "https://books.google.com/books?id=hFfHRarrNBIC",
+          previewLink: "https://books.google.com/books?id=hFfHRarrNBIC",
+          description: "Bilbo Baggins is a hobbit who enjoys a comfortable, unambitious life. But his contentment is disturbed when the wizard Gandalf and a company of thirteen dwarves arrive on his doorstep."
+        },
+        {
+          title: "Project Hail Mary",
+          author: "Andy Weir",
+          pages: 496,
+          genre: "Science Fiction",
+          format: "eBook",
+          isEbook: true,
+          cover: "https://covers.openlibrary.org/b/id/10543109-M.jpg",
+          rating: 5,
+          publishedYear: "2021",
+          ebookUrl: "https://books.google.com/books?id=WZLgDwAAQBAJ",
+          previewLink: "https://books.google.com/books?id=WZLgDwAAQBAJ",
+          description: "Ryland Grace is the sole survivor on a desperate, last-chance mission—and if he fails, humanity and the earth itself are doomed."
+        },
+        {
+          title: "Tomorrow, and Tomorrow, and Tomorrow",
+          author: "Gabrielle Zevin",
+          pages: 416,
+          genre: "Literary Fiction",
+          format: "eBook",
+          isEbook: true,
+          cover: "https://covers.openlibrary.org/b/id/12889244-M.jpg",
+          rating: 4.5,
+          publishedYear: "2022",
+          ebookUrl: "https://books.google.com/books?id=X5NREAAAQBAJ",
+          previewLink: "https://books.google.com/books?id=X5NREAAAQBAJ",
+          description: "On a bitter-cold day, in his junior year at Harvard, Sam Masur exits a subway car and sees, amid the throngs of people upon the platform, Sadie Green."
+        },
+        {
+          title: "Pride and Prejudice",
+          author: "Jane Austen",
+          pages: 432,
+          genre: "Classic",
+          format: "eBook",
+          isEbook: true,
+          cover: "https://covers.openlibrary.org/b/id/8314146-M.jpg",
+          rating: 5,
+          publishedYear: "1813",
+          ebookUrl: "https://books.google.com/books?id=s1gVAAAAYAAJ",
+          previewLink: "https://books.google.com/books?id=s1gVAAAAYAAJ",
+          description: "Few have failed to be charmed by the witty and independent Elizabeth Bennet in Austen's beloved classic of manners, marriage, and misunderstandings."
+        },
+        {
+          title: "The Great Gatsby",
+          author: "F. Scott Fitzgerald",
+          pages: 180,
+          genre: "Classic",
+          format: "eBook",
+          isEbook: true,
+          cover: "https://covers.openlibrary.org/b/id/8432047-M.jpg",
+          rating: 4,
+          publishedYear: "1925",
+          ebookUrl: "https://books.google.com/books?id=iXn5DwAAQBAJ",
+          previewLink: "https://books.google.com/books?id=iXn5DwAAQBAJ",
+          description: "The story of the mysteriously wealthy Jay Gatsby and his unrequited love for Daisy Buchanan in the Roaring Twenties on Long Island."
+        },
+        {
+          title: "The Midnight Library",
+          author: "Matt Haig",
+          pages: 304,
+          genre: "Fantasy",
+          format: "eBook",
+          isEbook: true,
+          cover: "https://covers.openlibrary.org/b/id/10313767-M.jpg",
+          rating: 4,
+          publishedYear: "2020",
+          ebookUrl: "https://books.google.com/books?id=uL7fDwAAQBAJ",
+          previewLink: "https://books.google.com/books?id=uL7fDwAAQBAJ",
+          description: "Between life and death there is a library, and within that library, the shelves go on forever. Every book provides a chance to try another life you could have lived."
+        },
+        {
+          title: "The Seven Husbands of Evelyn Hugo",
+          author: "Taylor Jenkins Reid",
+          pages: 400,
+          genre: "Historical Fiction",
+          format: "eBook",
+          isEbook: true,
+          cover: "https://covers.openlibrary.org/b/id/8775485-M.jpg",
+          rating: 4.5,
+          publishedYear: "2017",
+          ebookUrl: "https://books.google.com/books?id=WjU0DwAAQBAJ",
+          previewLink: "https://books.google.com/books?id=WjU0DwAAQBAJ",
+          description: "Aging and reclusive Hollywood movie icon Evelyn Hugo is finally ready to tell the truth about her glamorous and scandalous life."
+        },
+        {
+          title: "Sapiens: A Brief History of Humankind",
+          author: "Yuval Noah Harari",
+          pages: 464,
+          genre: "Non-Fiction",
+          format: "eBook",
+          isEbook: true,
+          cover: "https://covers.openlibrary.org/b/id/8389473-M.jpg",
+          rating: 4.5,
+          publishedYear: "2014",
+          ebookUrl: "https://books.google.com/books?id=1el2AwAAQBAJ",
+          previewLink: "https://books.google.com/books?id=1el2AwAAQBAJ",
+          description: "One hundred thousand years ago, at least six different species of humans inhabited Earth. Yet today there is only one—Homo sapiens."
+        }
+      ],
+
+      // Map raw API category strings to our 11 predefined app genres
+      mapGenre(raw) {
+        if (!raw) return 'Literary Fiction';
+        const str = String(raw).toLowerCase();
+        if (str.includes('sci') || str.includes('space') || str.includes('cyber')) return 'Science Fiction';
+        if (str.includes('magic') || str.includes('dragon') || str.includes('fantasy')) return 'Fantasy';
+        if (str.includes('romance') || str.includes('love')) return 'Romance';
+        if (str.includes('mystery') || str.includes('thrill') || str.includes('crime') || str.includes('detective') || str.includes('suspense')) return 'Mystery & Thriller';
+        if (str.includes('historic')) return 'Historical Fiction';
+        if (str.includes('bio') || str.includes('memoir') || str.includes('autobio')) return 'Biography';
+        if (str.includes('self-help') || str.includes('psycholog') || str.includes('motivat') || str.includes('habit') || str.includes('business')) return 'Self-Help';
+        if (str.includes('classic')) return 'Classic';
+        if (str.includes('horror') || str.includes('ghost') || str.includes('gothic')) return 'Horror';
+        if (str.includes('non-fiction') || str.includes('history') || str.includes('science') || str.includes('philosophy')) return 'Non-Fiction';
+        return 'Literary Fiction';
+      },
+
+      // Perform resilient search across Google Books, Open Library, and Instant Catalog
+      async searchBooks(query, ebooksOnly = false) {
+        const cleanQuery = (query || '').trim();
+        if (!cleanQuery) return { results: [], source: 'None' };
+
+        // 1. Try Google Books API with a fast timeout
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 4500);
+          const filterParam = ebooksOnly ? '&filter=ebooks' : '';
+          const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(cleanQuery)}&maxResults=8&printType=books${filterParam}`;
+          
+          const res = await fetch(url, { signal: controller.signal });
+          clearTimeout(timeoutId);
+
+          if (res.ok) {
+            const data = await res.json();
+            if (data.items && data.items.length > 0) {
+              const mapped = data.items.map(item => {
+                const info = item.volumeInfo || {};
+                const sale = item.saleInfo || {};
+                const access = item.accessInfo || {};
+
+                const title = info.title || 'Untitled';
+                const subtitle = info.subtitle ? `: ${info.subtitle}` : '';
+                const author = (info.authors && info.authors.join(', ')) || 'Unknown Author';
+                const pages = info.pageCount || 300;
+                
+                let cover = '';
+                if (info.imageLinks) {
+                  cover = (info.imageLinks.thumbnail || info.imageLinks.smallThumbnail || '').replace(/^http:\/\//i, 'https://');
+                }
+
+                const isEbook = Boolean(sale.isEbook || access.epub?.isAvailable || access.pdf?.isAvailable || ebooksOnly);
+                const ebookUrl = access.webReaderLink || info.previewLink || info.infoLink || '';
+                const previewLink = info.previewLink || access.webReaderLink || '';
+                const genre = this.mapGenre((info.categories && info.categories[0]) || 'Fiction');
+                const publishedYear = (info.publishedDate || '').substring(0, 4);
+                const description = info.description || '';
+                const rating = info.averageRating || null;
+
+                return {
+                  title: title + subtitle,
+                  author,
+                  pages,
+                  cover,
+                  genre,
+                  format: isEbook ? 'eBook' : 'Paperback',
+                  isEbook,
+                  publishedYear,
+                  ebookUrl,
+                  previewLink,
+                  description,
+                  rating,
+                  source: 'Google Books'
+                };
+              });
+
+              return { results: mapped, source: 'Google Books API' };
+            }
+          }
+        } catch (err) {
+          console.warn('Google Books API unavailable or rate-limited, switching to fallback:', err.message);
+        }
+
+        // 2. Cascade to Open Library API
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 4500);
+          const olUrl = `https://openlibrary.org/search.json?q=${encodeURIComponent(cleanQuery)}&limit=8`;
+
+          const res = await fetch(olUrl, { signal: controller.signal });
+          clearTimeout(timeoutId);
+
+          if (res.ok) {
+            const data = await res.json();
+            if (data.docs && data.docs.length > 0) {
+              let docs = data.docs;
+              if (ebooksOnly) {
+                const ebookDocs = docs.filter(d => d.ebook_access && d.ebook_access !== 'no_ebook');
+                if (ebookDocs.length > 0) docs = ebookDocs;
+              }
+
+              const mapped = docs.map(d => {
+                const title = d.title || 'Untitled';
+                const author = (d.author_name && d.author_name.join(', ')) || 'Unknown Author';
+                const pages = d.number_of_pages_median || (d.edition_count ? 320 : 280);
+                
+                let cover = '';
+                if (d.cover_i) {
+                  cover = `https://covers.openlibrary.org/b/id/${d.cover_i}-M.jpg`;
+                } else if (d.isbn && d.isbn[0]) {
+                  cover = `https://covers.openlibrary.org/b/isbn/${d.isbn[0]}-M.jpg`;
+                }
+
+                const isEbook = d.ebook_access && d.ebook_access !== 'no_ebook';
+                const genre = this.mapGenre((d.subject && d.subject[0]) || 'Fiction');
+                const publishedYear = d.first_publish_year ? String(d.first_publish_year) : '';
+                const previewLink = d.key ? `https://openlibrary.org${d.key}` : `https://books.google.com/books?q=${encodeURIComponent(title + ' ' + author)}`;
+                const ebookUrl = previewLink;
+                const description = d.first_sentence ? d.first_sentence[0] : `${title} by ${author}. Published in ${publishedYear || 'recent years'}.`;
+
+                return {
+                  title,
+                  author,
+                  pages,
+                  cover,
+                  genre,
+                  format: isEbook ? 'eBook' : 'Paperback',
+                  isEbook: Boolean(isEbook || ebooksOnly),
+                  publishedYear,
+                  ebookUrl,
+                  previewLink,
+                  description,
+                  series: (d.series_name && d.series_name[0]) || '',
+                  seriesNo: (d.series_position && parseInt(d.series_position[0], 10)) || null,
+                  rating: 4.5,
+                  source: 'Open Library & Google Archive'
+                };
+              });
+
+              return { results: mapped, source: 'Open Library & Google Archive' };
+            }
+          }
+        } catch (err) {
+          console.warn('Open Library API unavailable or timeout, switching to instant catalog:', err.message);
+        }
+
+        // 3. Fallback: Curated Instant Catalog Search
+        const qLower = cleanQuery.toLowerCase();
+        const catalogMatches = this.instantCatalog.filter(b => 
+          b.title.toLowerCase().includes(qLower) || 
+          b.author.toLowerCase().includes(qLower) ||
+          b.genre.toLowerCase().includes(qLower) ||
+          (b.series && b.series.toLowerCase().includes(qLower))
+        );
+
+        if (catalogMatches.length > 0) {
+          return { results: catalogMatches, source: 'Instant Curated eBook Catalog' };
+        }
+
+        return { results: [], source: 'None' };
+      }
+    };
+
+    /* --------------------------------------------------------------------------
        6. UI RENDERING & COMPONENT MANAGERS
        -------------------------------------------------------------------------- */
     const UIRenderer = {
@@ -4221,7 +5104,7 @@
         this.renderDashboardKPIs();
         this.renderCurrentlyReading();
         this.renderReadingGoal();
-        this.renderHeatmap();
+        this.renderReadingActivityScreen();
         this.renderDashboardShelf();
         this.renderLibrary();
         this.renderPickNext();
@@ -4307,50 +5190,206 @@
         }
       },
 
-      renderHeatmap() {
-        const grid = document.getElementById('dashboardHeatmapGrid');
-        if (!grid) return;
-        grid.innerHTML = '';
-
-        const activityMap = StatsService.getReadingActivityMap();
+      renderReadingActivityScreen() {
         const streakStats = StatsService.getStreakStats();
+        const activityMap = StatsService.getReadingActivityMap();
+        const rangeDays = AppState.activityRange || 91;
+        const metric = AppState.activityMetric || 'pages';
+
+        // 1. Calculate stats within the selected range
         const now = new Date();
+        let totalPagesInRange = 0;
+        let totalMinutesInRange = 0;
+        let activeDaysInRange = 0;
 
-        // Update streak & summary tags on dashboard
-        const streakValEl = document.getElementById('dashStreakVal');
-        if (streakValEl) streakValEl.textContent = `${streakStats.currentStreak} days`;
-
-        const summaryEl = document.getElementById('heatmapStatsSummary');
-        if (summaryEl) {
-          summaryEl.innerHTML = `13-week active reading streak: <strong id="dashStreakVal">${streakStats.currentStreak} days</strong> 🔥 (${streakStats.totalActiveDays} active reading days • ${streakStats.totalPagesLast91Days.toLocaleString()} pages)`;
-        }
-
-        // 13 weeks = 91 days
-        const totalDays = 91;
-        for (let i = totalDays - 1; i >= 0; i--) {
-          const cell = document.createElement('div');
+        for (let i = 0; i < rangeDays; i++) {
           const d = new Date(now.getTime() - i * 86400000);
           const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-          const dateDisplay = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
           const act = activityMap[dateStr];
-          const pages = act ? act.pagesRead : 0;
+          if (act && (act.pagesRead > 0 || act.finished.length > 0)) {
+            activeDaysInRange++;
+            totalPagesInRange += (act.pagesRead || 0);
+            totalMinutesInRange += (act.minutes || Math.round((act.pagesRead || 0) * 1.2));
+          }
+        }
 
-          let lvl = 0;
-          if (pages > 0 && pages <= 20) lvl = 1;
-          else if (pages > 20 && pages <= 45) lvl = 2;
-          else if (pages > 45 && pages <= 75) lvl = 3;
-          else if (pages > 75) lvl = 4;
+        // 2. Top 4 Activity KPIs
+        const streakEl = document.getElementById('actStreakNum');
+        if (streakEl) streakEl.textContent = `${streakStats.currentStreak} Days`;
 
-          cell.className = `heatmap-cell cell-lvl-${lvl}`;
-          const sessionDesc = act && act.books.length ? ` (${act.books.join(', ')})` : '';
-          const finishedDesc = act && act.finished.length ? ` • Finished: ${act.finished.join(', ')}` : '';
-          cell.title = `${dateDisplay}: ${pages} pages read${sessionDesc}${finishedDesc}`;
+        const activeDaysEl = document.getElementById('actActiveDaysNum');
+        if (activeDaysEl) {
+          const pct = Math.round((activeDaysInRange / rangeDays) * 100);
+          activeDaysEl.textContent = `${activeDaysInRange} / ${rangeDays} (${pct}%)`;
+        }
 
-          cell.onclick = () => {
-            App.openCalendarDayModal(dateStr);
-          };
+        const totalPagesEl = document.getElementById('actTotalPagesNum');
+        if (totalPagesEl) totalPagesEl.textContent = totalPagesInRange.toLocaleString();
 
-          grid.appendChild(cell);
+        const totalTimeEl = document.getElementById('actTotalTimeNum');
+        if (totalTimeEl) totalTimeEl.textContent = `${(totalMinutesInRange / 60).toFixed(1)} hrs`;
+
+        // Update sidebar streak badge if present
+        const sideBadge = document.getElementById('sidebarStreakBadge');
+        if (sideBadge) sideBadge.textContent = `${streakStats.currentStreak}d 🔥`;
+
+        // 3. Heatmap Summary Line
+        const summaryEl = document.getElementById('actHeatmapStatsSummary');
+        if (summaryEl) {
+          summaryEl.innerHTML = `Active streak: <strong>${streakStats.currentStreak} days 🔥</strong> • ${activeDaysInRange} active reading days (${totalPagesInRange.toLocaleString()} pages, ${Math.round(totalMinutesInRange / 60)} hrs logged)`;
+        }
+
+        // 4. Activity Heatmap Grid with proper 7-row Sunday-to-Saturday columns
+        const grid = document.getElementById('activityHeatmapGrid');
+        if (grid) {
+          grid.innerHTML = '';
+
+          // Calculate start date
+          const startDate = new Date(now.getTime() - (rangeDays - 1) * 86400000);
+          const startDayOfWeek = startDate.getDay(); // 0 = Sunday, 6 = Saturday
+
+          // Add initial empty placeholder cells to align start of grid with day-of-week rows
+          for (let p = 0; p < startDayOfWeek; p++) {
+            const padCell = document.createElement('div');
+            padCell.className = 'activity-cell is-future';
+            grid.appendChild(padCell);
+          }
+
+          // Render rangeDays cells from oldest to newest
+          for (let i = rangeDays - 1; i >= 0; i--) {
+            const cell = document.createElement('div');
+            const d = new Date(now.getTime() - i * 86400000);
+            const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+            const dateDisplay = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+            const act = activityMap[dateStr];
+
+            const pages = act ? act.pagesRead : 0;
+            const minutes = act ? (act.minutes || Math.round(pages * 1.2)) : 0;
+            const val = metric === 'minutes' ? minutes : pages;
+
+            let lvl = 0;
+            if (metric === 'minutes') {
+              if (val > 0 && val <= 20) lvl = 1;
+              else if (val > 20 && val <= 40) lvl = 2;
+              else if (val > 40 && val <= 65) lvl = 3;
+              else if (val > 65) lvl = 4;
+            } else {
+              if (val > 0 && val <= 20) lvl = 1;
+              else if (val > 20 && val <= 45) lvl = 2;
+              else if (val > 45 && val <= 75) lvl = 3;
+              else if (val > 75) lvl = 4;
+            }
+
+            cell.className = `activity-cell lvl-${lvl}`;
+            const sessionDesc = act && act.books.length ? ` • ${act.books.join(', ')}` : '';
+            const finishedDesc = act && act.finished.length ? ` • 🏆 Finished: ${act.finished.join(', ')}` : '';
+            const noteDesc = act && act.hasJournal ? ' • ✍️ Journal entry' : '';
+
+            cell.title = `${dateDisplay}: ${pages} pages (${minutes} mins)${sessionDesc}${finishedDesc}${noteDesc}`;
+            cell.onclick = () => App.openCalendarDayModal(dateStr);
+            grid.appendChild(cell);
+          }
+        }
+
+        // 5. Weekly Reading Rhythm Chart
+        const rhythm = StatsService.getWeeklyDayDistribution();
+        const rhythmWrap = document.getElementById('actWeeklyRhythmChart');
+        if (rhythmWrap) {
+          const peakTextEl = document.getElementById('actPeakDayText');
+          if (peakTextEl) {
+            peakTextEl.textContent = `Peak: ${rhythm.peakDay} (${rhythm.peakPages} pages)`;
+          }
+
+          rhythmWrap.innerHTML = rhythm.days.map((day, idx) => {
+            const pages = rhythm.pageCounts[idx];
+            const sessions = rhythm.sessionCounts[idx];
+            const heightPct = pages > 0 ? Math.max(10, Math.round((pages / rhythm.maxPages) * 100)) : 4;
+            const isPeak = (day === rhythm.peakDay && pages > 0);
+
+            return `
+              <div class="rhythm-bar-col">
+                <span class="rhythm-bar-val" style="color: ${isPeak ? 'var(--accent-primary)' : 'var(--text-muted)'}">${pages > 0 ? pages + 'p' : '-'}</span>
+                <div class="rhythm-bar-fill" style="height: ${heightPct}%; background: ${isPeak ? 'var(--accent-primary)' : 'rgba(200, 109, 86, 0.4)'};">
+                  <title>${day}: ${pages} pages across ${sessions} sessions</title>
+                </div>
+                <span class="rhythm-bar-label" style="font-weight: ${isPeak ? '700' : '500'}; color: ${isPeak ? 'var(--accent-primary)' : 'var(--text-muted)'};">${day}</span>
+              </div>
+            `;
+          }).join('');
+        }
+
+        // 6. Reading Habit Insights
+        const habitsWrap = document.getElementById('actHabitsInsights');
+        if (habitsWrap) {
+          const velocity = StatsService.getReadingVelocity();
+          const finishedBooks = AppState.books.filter(b => b.status === 'Finished');
+          const longestSession = Math.max(0, ...(AppState.sessions || []).map(s => s.pagesRead || 0));
+          const avgSessionMins = AppState.sessions && AppState.sessions.length > 0
+            ? Math.round(AppState.sessions.reduce((a,b)=>a+(b.minutes||0), 0) / AppState.sessions.length)
+            : 30;
+
+          const habitItems = [
+            { label: 'Reading Velocity', val: `${velocity} pages / day`, desc: 'Average daily pace across active reading periods' },
+            { label: 'Average Session Duration', val: `${avgSessionMins} minutes`, desc: 'Average focused reading time per logged session' },
+            { label: 'Completion Frequency', val: `~1 book every ${Math.max(1, Math.round(365 / Math.max(1, finishedBooks.length)))} days`, desc: `${finishedBooks.length} finished books recorded` },
+            { label: 'Longest Single Session', val: `${longestSession} pages read`, desc: 'Your peak focused reading milestone session' }
+          ];
+
+          habitsWrap.innerHTML = habitItems.map(item => `
+            <div style="background: var(--bg-card-subtle); padding: 12px 16px; border-radius: var(--radius-md); border-left: 3px solid var(--accent-primary);">
+              <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 700;">${item.label}</span>
+                <span style="font-size: 14px; font-weight: 700; color: var(--accent-primary);">${item.val}</span>
+              </div>
+              <div style="font-size: 12px; color: var(--text-muted); margin-top: 3px;">${item.desc}</div>
+            </div>
+          `).join('');
+        }
+
+        // 7. Chronological Reading Sessions List
+        const listWrap = document.getElementById('activitySessionsList');
+        const countBadge = document.getElementById('actSessionsCount');
+        const sortedSessions = [...(AppState.sessions || [])].sort((a,b) => (b.date || '').localeCompare(a.date || ''));
+
+        if (countBadge) {
+          countBadge.textContent = `${sortedSessions.length} sessions`;
+        }
+
+        if (listWrap) {
+          if (sortedSessions.length === 0) {
+            listWrap.innerHTML = `
+              <div style="padding: 40px 20px; text-align: center; color: var(--text-muted);">
+                <p style="margin-bottom: 12px;">No logged reading sessions yet.</p>
+                <button class="btn-primary" onclick="App.openQuickSessionModal()">+ Log First Reading Session</button>
+              </div>
+            `;
+          } else {
+            listWrap.innerHTML = sortedSessions.slice(0, 30).map(s => {
+              const book = AppState.books.find(b => b.id === s.bookId || b.title === s.bookTitle);
+              const parts = s.date ? s.date.split('-') : [];
+              const dateDisplay = parts.length === 3
+                ? new Date(parseInt(parts[0],10), parseInt(parts[1],10)-1, parseInt(parts[2],10)).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                : s.date;
+
+              return `
+                <div class="session-timeline-card">
+                  <div style="display: flex; align-items: center; gap: 14px; overflow: hidden;">
+                    <div style="font-size: 20px; flex-shrink: 0;">📖</div>
+                    <div style="overflow: hidden;">
+                      <strong style="font-size: 14px; color: var(--text-main); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer;" onclick="App.openBookDetail('${book ? book.id : ''}')">
+                        ${this.escapeHtml(s.bookTitle || 'Reading Session')}
+                      </strong>
+                      <span style="font-size: 12px; color: var(--text-muted);">${dateDisplay} • ${s.minutes || 25} minutes</span>
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
+                    <span class="status-badge status-reading" style="font-weight: 700; font-size: 12px;">+${s.pagesRead} pages</span>
+                    <button class="btn-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="App.openCalendarDayModal('${s.date}')">Day View</button>
+                  </div>
+                </div>
+              `;
+            }).join('');
+          }
         }
       },
 
@@ -5002,21 +6041,53 @@
         const container = document.getElementById('themesGridContainer');
         if (!container) return;
 
-        container.innerHTML = THEMES_CONFIG.map(t => {
-          const isActive = (AppState.settings.theme === t.id);
-          return `
-            <div class="theme-card-btn ${isActive ? 'active' : ''}" onclick="App.setTheme('${t.id}')">
-              <div class="theme-swatches">
-                <span style="background-color: ${t.swatches[0]}"></span>
-                <span style="background-color: ${t.swatches[1]}"></span>
-                <span style="background-color: ${t.swatches[2]}"></span>
-                <span style="background-color: ${t.swatches[3]}"></span>
+        if (container.children.length === 0) {
+          container.innerHTML = THEMES_CONFIG.map(t => {
+            const isActive = (AppState.settings.theme === t.id);
+            return `
+              <div class="theme-card-btn ${isActive ? 'active' : ''}" data-theme-id="${t.id}" onclick="App.setTheme('${t.id}')">
+                <div class="theme-swatches">
+                  <span style="background-color: ${t.swatches[0]}"></span>
+                  <span style="background-color: ${t.swatches[1]}"></span>
+                  <span style="background-color: ${t.swatches[2]}"></span>
+                  <span style="background-color: ${t.swatches[3]}"></span>
+                </div>
+                <span style="font-size: 13px; font-weight: 600;">${t.name}</span>
               </div>
-              <span style="font-size: 13px; font-weight: 600;">${t.name}</span>
-            </div>
-          `;
-        }).join('');
+            `;
+          }).join('');
+        } else {
+          this.updateActiveThemeCard(AppState.settings.theme);
+        }
+        this.updateModeTogglePills(AppState.settings.mode);
       },
+
+      updateActiveThemeCard(themeId) {
+        const container = document.getElementById('themesGridContainer');
+        if (!container) return;
+        const cards = container.querySelectorAll('.theme-card-btn');
+        cards.forEach(card => {
+          if (card.getAttribute('data-theme-id') === themeId) {
+            card.classList.add('active');
+          } else {
+            card.classList.remove('active');
+          }
+        });
+      },
+
+      updateModeTogglePills(mode) {
+        const lightBtn = document.getElementById('settingsModeLightBtn');
+        const darkBtn = document.getElementById('settingsModeDarkBtn');
+        if (!lightBtn || !darkBtn) return;
+        if (mode === 'dark') {
+          darkBtn.classList.add('active');
+          lightBtn.classList.remove('active');
+        } else {
+          lightBtn.classList.add('active');
+          darkBtn.classList.remove('active');
+        }
+      },
+
 
       escapeHtml(str) {
         if (!str) return '';
@@ -5026,6 +6097,75 @@
           .replace(/>/g, '&gt;')
           .replace(/"/g, '&quot;')
           .replace(/'/g, '&#039;');
+      },
+
+      renderGoogleResults(results, source, query) {
+        const container = document.getElementById('googleResultsContainer');
+        if (!container) return;
+
+        if (!results || results.length === 0) {
+          container.innerHTML = `
+            <div style="padding: 16px; font-size: 13px; color: var(--text-muted); text-align: center;">
+              No matching books or eBooks found for "<strong>${this.escapeHtml(query)}</strong>".<br>
+              <span style="font-size: 12px; margin-top: 4px; display: inline-block;">You can enter the book details manually in the form below.</span>
+            </div>
+          `;
+          return;
+        }
+
+        const headerHtml = `
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 4px 6px; font-size: 11.5px; color: var(--text-muted); border-bottom: 1px solid var(--border-subtle); margin-bottom: 6px;">
+            <span>Found <strong>${results.length}</strong> results (${this.escapeHtml(source)})</span>
+            <span style="color: var(--color-accent); font-weight: 600;">Click card or "Apply" to auto-fill</span>
+          </div>
+        `;
+
+        const itemsHtml = results.map((book, idx) => {
+          const coverHtml = book.cover 
+            ? `<img src="${this.escapeHtml(book.cover)}" alt="${this.escapeHtml(book.title)}" style="width: 42px; height: 60px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border-subtle);" onerror="this.onerror=null; this.src=''; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+               <div style="display: none; width: 42px; height: 60px; background: var(--bg-card-subtle); border-radius: 4px; align-items: center; justify-content: center; font-size: 20px;">📖</div>`
+            : `<div style="width: 42px; height: 60px; background: var(--bg-card-subtle); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 20px;">📖</div>`;
+
+          const ebookBadge = book.isEbook
+            ? `<span class="ebook-pill" title="eBook edition available">📱 Google eBook</span>`
+            : '';
+
+          const previewBtn = (book.previewLink || book.ebookUrl)
+            ? `<a href="${this.escapeHtml(book.previewLink || book.ebookUrl)}" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding: 4px 10px; font-size: 11.5px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;" title="Open eBook Preview in new tab" onclick="event.stopPropagation();">
+                <span>Preview eBook</span>
+                <svg style="width: 11px; height: 11px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+               </a>`
+            : '';
+
+          return `
+            <div class="google-item-card" id="googleItemCard-${idx}" onclick="App.applyGoogleBookByIndex(${idx})">
+              <div style="flex-shrink: 0;">
+                ${coverHtml}
+              </div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-bottom: 2px;">
+                  <strong style="font-size: 13px; color: var(--text-main); line-height: 1.3;">${this.escapeHtml(book.title)}</strong>
+                  ${ebookBadge}
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">
+                  By <strong>${this.escapeHtml(book.author)}</strong> • ${book.pages} pp ${book.publishedYear ? `• ${book.publishedYear}` : ''}
+                </div>
+                <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-bottom: 6px;">
+                  <span class="genre-pill">${this.escapeHtml(book.genre)}</span>
+                  ${book.series ? `<span class="genre-pill" style="color: var(--color-accent);">📚 ${this.escapeHtml(book.series)}</span>` : ''}
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                  <button type="button" class="btn-primary" style="padding: 4px 10px; font-size: 11.5px; display: inline-flex; align-items: center; gap: 4px;">
+                    ✓ Apply Details
+                  </button>
+                  ${previewBtn}
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        container.innerHTML = headerHtml + itemsHtml;
       }
     };
 
@@ -5113,11 +6253,24 @@
         });
 
         // Theme Toggle Button
-        document.getElementById('headerThemeToggleBtn').addEventListener('click', () => {
-          const isCurrentlyDark = (document.documentElement.getAttribute('data-mode') === 'dark' || AppState.settings.mode === 'dark' || document.documentElement.getAttribute('data-theme') === 'midnight-library');
-          const newMode = isCurrentlyDark ? 'light' : 'dark';
-          this.setMode(newMode);
-        });
+        const headerThemeBtn = document.getElementById('headerThemeToggleBtn');
+        if (headerThemeBtn) {
+          headerThemeBtn.addEventListener('click', () => {
+            const isCurrentlyDark = (document.documentElement.getAttribute('data-mode') === 'dark' || AppState.settings.mode === 'dark');
+            const newMode = isCurrentlyDark ? 'light' : 'dark';
+            this.setMode(newMode);
+          });
+        }
+
+        // Settings Display Mode Buttons (Light / Dark)
+        const modeLightBtn = document.getElementById('settingsModeLightBtn');
+        if (modeLightBtn) {
+          modeLightBtn.addEventListener('click', () => this.setMode('light'));
+        }
+        const modeDarkBtn = document.getElementById('settingsModeDarkBtn');
+        if (modeDarkBtn) {
+          modeDarkBtn.addEventListener('click', () => this.setMode('dark'));
+        }
 
         // Settings Shortcut
         document.getElementById('headerSettingsBtn').addEventListener('click', () => {
@@ -5224,8 +6377,56 @@
           });
         });
 
-        // Google Books search button
-        document.getElementById('googleSearchBtn').addEventListener('click', () => this.searchGoogleBooks());
+        // Google Books & eBooks Quick Lookup Listeners
+        const googleSearchBtn = document.getElementById('googleSearchBtn');
+        if (googleSearchBtn) {
+          googleSearchBtn.addEventListener('click', () => this.searchGoogleBooks());
+        }
+
+        const googleSearchInput = document.getElementById('googleSearchInput');
+        if (googleSearchInput) {
+          googleSearchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              this.searchGoogleBooks();
+            }
+          });
+          googleSearchInput.addEventListener('input', (e) => {
+            const clearBtn = document.getElementById('googleClearSearchBtn');
+            if (clearBtn) {
+              clearBtn.style.display = e.target.value.trim() ? 'inline-flex' : 'none';
+            }
+          });
+        }
+
+        const googleClearBtn = document.getElementById('googleClearSearchBtn');
+        if (googleClearBtn) {
+          googleClearBtn.addEventListener('click', () => this.clearGoogleSearch());
+        }
+
+        const filterAllBtn = document.getElementById('lookupFilterAllBtn');
+        const filterEbookBtn = document.getElementById('lookupFilterEbookBtn');
+        if (filterAllBtn && filterEbookBtn) {
+          filterAllBtn.addEventListener('click', () => {
+            filterAllBtn.classList.add('active');
+            filterEbookBtn.classList.remove('active');
+            AppState.lookupEbooksOnly = false;
+            const query = googleSearchInput ? googleSearchInput.value.trim() : '';
+            if (query) this.searchGoogleBooks();
+          });
+          filterEbookBtn.addEventListener('click', () => {
+            filterEbookBtn.classList.add('active');
+            filterAllBtn.classList.remove('active');
+            AppState.lookupEbooksOnly = true;
+            const query = googleSearchInput ? googleSearchInput.value.trim() : '';
+            if (query) this.searchGoogleBooks();
+          });
+        }
+
+        const libQuickLookup = document.getElementById('libQuickLookupBtn');
+        if (libQuickLookup) {
+          libQuickLookup.addEventListener('click', () => this.openAddBookModal(true));
+        }
 
         // Import & Export buttons
         document.getElementById('downloadBackupBtn').addEventListener('click', () => this.exportJsonBackup());
@@ -5267,6 +6468,30 @@
         const cancelCalDay = document.getElementById('cancelCalDayModalBtn');
         if (cancelCalDay) cancelCalDay.addEventListener('click', () => this.closeModal('calendarDayModalOverlay'));
 
+        // Reading Activity Screen Controls
+        const actLogBtn = document.getElementById('actLogSessionBtn');
+        if (actLogBtn) {
+          actLogBtn.addEventListener('click', () => this.openQuickSessionModal());
+        }
+
+        document.querySelectorAll('#actRangePills .pill-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            document.querySelectorAll('#actRangePills .pill-btn').forEach(b => b.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            AppState.activityRange = parseInt(e.currentTarget.dataset.range, 10) || 91;
+            UIRenderer.renderReadingActivityScreen();
+          });
+        });
+
+        document.querySelectorAll('#actMetricPills .pill-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            document.querySelectorAll('#actMetricPills .pill-btn').forEach(b => b.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            AppState.activityMetric = e.currentTarget.dataset.metric || 'pages';
+            UIRenderer.renderReadingActivityScreen();
+          });
+        });
+
         // Profile Settings save
         document.getElementById('saveProfileSettingsBtn').addEventListener('click', () => {
           const name = document.getElementById('settingsReaderName').value.trim();
@@ -5307,7 +6532,6 @@
           UIRenderer.renderDashboardKPIs();
           UIRenderer.renderCurrentlyReading();
           UIRenderer.renderReadingGoal();
-          UIRenderer.renderHeatmap();
           UIRenderer.renderDashboardShelf();
         } else if (viewId === 'library') {
           UIRenderer.renderLibrary();
@@ -5317,14 +6541,16 @@
           UIRenderer.renderSeries();
         } else if (viewId === 'journal') {
           UIRenderer.renderJournal();
+        } else if (viewId === 'calendar') {
+          UIRenderer.renderCalendar();
+        } else if (viewId === 'activity') {
+          UIRenderer.renderReadingActivityScreen();
         } else if (viewId === 'quotes') {
           UIRenderer.renderQuotes();
         } else if (viewId === 'progress') {
           UIRenderer.renderMilestonesAndChallenges();
         } else if (viewId === 'statistics') {
           UIRenderer.renderStatisticsCharts();
-        } else if (viewId === 'calendar') {
-          UIRenderer.renderCalendar();
         }
 
         // Scroll to top
@@ -5360,50 +6586,93 @@
       },
 
       setTheme(themeId) {
-        AppState.settings.theme = themeId;
+        let currentMode = AppState.settings.mode || 'light';
         if (themeId === 'midnight-library') {
-          AppState.settings.mode = 'dark';
-          document.documentElement.setAttribute('data-mode', 'dark');
+          currentMode = 'dark';
         } else {
           AppState.settings.savedLightTheme = themeId;
-          AppState.settings.mode = 'light';
-          document.documentElement.setAttribute('data-mode', 'light');
         }
-        AppState.saveSettings();
-        document.documentElement.setAttribute('data-theme', themeId);
-        this.updateThemeToggleIcon(AppState.settings.mode);
-        UIRenderer.renderThemes();
-        this.showToast(`Theme switched to ${themeId.replace('-', ' ')}`, 'info');
+        this.applyTheme(themeId, currentMode, true);
       },
 
       setMode(mode) {
-        AppState.settings.mode = mode;
-        document.documentElement.setAttribute('data-mode', mode);
-
+        let currentTheme = AppState.settings.theme || 'editorial-cream';
         if (mode === 'dark') {
-          if (AppState.settings.theme && AppState.settings.theme !== 'midnight-library') {
-            AppState.settings.savedLightTheme = AppState.settings.theme;
+          if (currentTheme !== 'midnight-library') {
+            AppState.settings.savedLightTheme = currentTheme;
           }
         } else {
-          if (AppState.settings.theme === 'midnight-library') {
-            const restoreTheme = AppState.settings.savedLightTheme || 'editorial-cream';
-            AppState.settings.theme = restoreTheme;
-            document.documentElement.setAttribute('data-theme', restoreTheme);
+          if (currentTheme === 'midnight-library') {
+            currentTheme = AppState.settings.savedLightTheme || 'editorial-cream';
           }
         }
-
-        AppState.saveSettings();
-        this.updateThemeToggleIcon(mode);
-        UIRenderer.renderThemes();
-        this.showToast(`Switched to ${mode} mode`, 'info');
+        this.applyTheme(currentTheme, mode, true);
       },
 
-      applyTheme(themeId, mode) {
+      applyTheme(themeId, mode, withToast = false) {
         AppState.settings.theme = themeId;
         AppState.settings.mode = mode;
-        document.documentElement.setAttribute('data-theme', themeId);
-        document.documentElement.setAttribute('data-mode', mode);
+        AppState.saveSettings();
+
+        const doc = document.documentElement;
+
+        // 1. Freeze transitions & animations during change to eliminate mobile/tablet GPU flickering
+        doc.classList.add('theme-switching');
+
+        // 2. Atomic attribute updates
+        doc.setAttribute('data-theme', themeId);
+        doc.setAttribute('data-mode', mode);
+
+        // 3. Keep Android browser status bar & chrome color in sync
+        this.updateMetaThemeColor(themeId, mode);
+
+        // 4. Force single layout flush while transitions are frozen
+        void doc.offsetHeight;
+
+        // 5. Unfreeze transitions smoothly on next animation frame
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            doc.classList.remove('theme-switching');
+          });
+        });
+
+        // 6. Update UI toggle controls without wiping DOM
         this.updateThemeToggleIcon(mode);
+        UIRenderer.updateActiveThemeCard(themeId);
+        UIRenderer.updateModeTogglePills(mode);
+
+        if (withToast) {
+          const themeName = themeId.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+          this.showToast(`Theme updated: ${themeName} (${mode.toUpperCase()})`, 'info');
+        }
+      },
+
+      updateMetaThemeColor(themeId, mode) {
+        let metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (!metaTheme) {
+          metaTheme = document.createElement('meta');
+          metaTheme.name = 'theme-color';
+          document.head.appendChild(metaTheme);
+        }
+        if (mode === 'dark') {
+          metaTheme.setAttribute('content', '#0F131A');
+        } else {
+          const bgMap = {
+            'editorial-cream': '#FAF7F2',
+            'midnight-library': '#0F131A',
+            'rosewood': '#FAF3F4',
+            'forest-reading': '#F4F7F4',
+            'autumn-library': '#FAF5EE',
+            'ocean-ink': '#F1F5F9',
+            'lavender-pages': '#F7F5FA',
+            'espresso-paper': '#F7F3EE',
+            'sage-linen': '#F5F7F4',
+            'vintage-bookshop': '#F3EBDD',
+            'minimal-monochrome': '#F8F9FA',
+            'sunset-reading': '#FAF4F2'
+          };
+          metaTheme.setAttribute('content', bgMap[themeId] || '#FAF7F2');
+        }
       },
 
       updateThemeToggleIcon(mode) {
@@ -5430,12 +6699,30 @@
         if (m) m.classList.remove('open');
       },
 
-      openAddBookModal() {
+      openAddBookModal(focusLookup = false) {
         document.getElementById('bookForm').reset();
         document.getElementById('formBookId').value = '';
+        const ebookInput = document.getElementById('bookFormEbookUrl');
+        if (ebookInput) ebookInput.value = '';
         document.getElementById('bookModalTitle').textContent = 'Add Book to Library';
-        document.getElementById('googleResultsContainer').style.display = 'none';
+        const googleInput = document.getElementById('googleSearchInput');
+        if (googleInput) googleInput.value = '';
+        const clearBtn = document.getElementById('googleClearSearchBtn');
+        if (clearBtn) clearBtn.style.display = 'none';
+        const container = document.getElementById('googleResultsContainer');
+        if (container) {
+          container.style.display = 'none';
+          container.innerHTML = '';
+        }
         this.openModal('bookModalOverlay');
+        setTimeout(() => {
+          if (focusLookup && googleInput) {
+            googleInput.focus();
+          } else {
+            const titleInput = document.getElementById('bookFormTitle');
+            if (titleInput) titleInput.focus();
+          }
+        }, 120);
       },
 
       openBookDetail(bookId) {
@@ -5459,6 +6746,7 @@
                 <span class="status-badge status-reading">${book.status}</span>
                 <span class="status-badge status-tbr">${book.genre || 'General'}</span>
                 <span class="status-badge status-dnf">${book.format || 'Paperback'}</span>
+                ${(book.ebookUrl || book.format === 'eBook') ? `<span class="ebook-pill" style="font-size: 11px;">📱 Google eBook</span>` : ''}
                 ${book.rating > 0 ? `<span class="status-badge status-finished">★ ${book.rating}</span>` : ''}
               </div>
 
@@ -5474,10 +6762,19 @@
 
               ${book.notes ? `<div style="background: var(--bg-card-subtle); padding: 12px 16px; border-radius: var(--radius-md); font-size: 13.5px; line-height: 1.5; margin-bottom: 16px;">${UIRenderer.escapeHtml(book.notes)}</div>` : ''}
 
-              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
                 <button class="btn-primary" onclick="App.openProgressModal('${book.id}')">Update Progress</button>
                 <button class="btn-secondary" onclick="App.markBookFinished('${book.id}')">✓ Mark as Finished</button>
                 <button class="btn-secondary" onclick="App.openJournalModal('${book.id}')">Add Reflection</button>
+                ${book.ebookUrl ? `
+                  <a href="${UIRenderer.escapeHtml(book.ebookUrl)}" target="_blank" rel="noopener noreferrer" class="btn-primary" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; color: #fff;">
+                    <span>📱 Read / Preview Google eBook ↗</span>
+                  </a>
+                ` : (book.format === 'eBook' || book.format === 'Kindle' ? `
+                  <a href="https://books.google.com/books?q=${encodeURIComponent(book.title + ' ' + book.author)}" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                    <span>🔍 Find on Google eBooks ↗</span>
+                  </a>
+                ` : '')}
               </div>
             </div>
           </div>
@@ -5573,19 +6870,20 @@
         const seriesNo = parseInt(document.getElementById('bookFormSeriesNo').value, 10) || null;
         const coverUrl = document.getElementById('bookFormCoverUrl').value.trim();
         const notes = document.getElementById('bookFormNotes').value.trim();
+        const ebookUrl = document.getElementById('bookFormEbookUrl')?.value?.trim() || '';
 
         if (id) {
           // Edit
           const book = AppState.books.find(b => b.id === id);
           if (book) {
-            Object.assign(book, { title, author, pages, currentPage, status, genre, format, rating, series, seriesNo, coverUrl, notes });
+            Object.assign(book, { title, author, pages, currentPage, status, genre, format, rating, series, seriesNo, coverUrl, notes, ebookUrl });
             this.showToast(`Updated "${title}"`, 'success');
           }
         } else {
           // Add new
           const newBook = {
             id: `book-${Date.now()}`,
-            title, author, pages, currentPage, status, genre, format, rating, series, seriesNo, coverUrl, notes,
+            title, author, pages, currentPage, status, genre, format, rating, series, seriesNo, coverUrl, notes, ebookUrl,
             favorite: false,
             createdAt: new Date().toISOString()
           };
@@ -5615,6 +6913,8 @@
         document.getElementById('bookFormSeriesNo').value = book.seriesNo || '';
         document.getElementById('bookFormCoverUrl').value = book.coverUrl || '';
         document.getElementById('bookFormNotes').value = book.notes || '';
+        const ebookInput = document.getElementById('bookFormEbookUrl');
+        if (ebookInput) ebookInput.value = book.ebookUrl || '';
 
         document.getElementById('bookModalTitle').textContent = 'Edit Book';
         this.closeModal('bookDetailModalOverlay');
@@ -5854,52 +7154,138 @@
       },
 
       async searchGoogleBooks() {
-        const query = document.getElementById('googleSearchInput').value.trim();
-        if (!query) return;
+        const input = document.getElementById('googleSearchInput');
+        const query = input ? input.value.trim() : '';
+        if (!query) {
+          this.showToast('Please enter a book title, author, or ISBN to search.', 'warning');
+          return;
+        }
 
         const container = document.getElementById('googleResultsContainer');
-        container.style.display = 'flex';
-        container.innerHTML = `<div style="padding: 12px; font-size: 13px; color: var(--text-muted); text-align: center;">Searching Google Books...</div>`;
+        const searchBtn = document.getElementById('googleSearchBtn');
+        const clearBtn = document.getElementById('googleClearSearchBtn');
+
+        if (clearBtn) clearBtn.style.display = 'inline-flex';
+        if (container) {
+          container.style.display = 'flex';
+          container.innerHTML = `
+            <div style="padding: 24px 16px; font-size: 13px; color: var(--text-muted); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;">
+              <div style="width: 22px; height: 22px; border: 2.5px solid var(--border-subtle); border-top-color: var(--color-accent); border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+              <span>Searching Google Books & eBooks database...</span>
+            </div>
+          `;
+        }
+        if (searchBtn) searchBtn.disabled = true;
 
         try {
-          const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=5`);
-          const data = await res.json();
-          if (!data.items || data.items.length === 0) {
-            container.innerHTML = `<div style="padding: 12px; font-size: 13px; color: var(--text-muted);">No results found. You can enter details manually.</div>`;
-            return;
-          }
-
-          container.innerHTML = data.items.map(item => {
-            const info = item.volumeInfo || {};
-            const title = info.title || 'Unknown Title';
-            const author = (info.authors && info.authors[0]) || 'Unknown Author';
-            const pages = info.pageCount || 300;
-            const cover = (info.imageLinks && (info.imageLinks.thumbnail || info.imageLinks.smallThumbnail)) || '';
-            const genre = (info.categories && info.categories[0]) || 'Fantasy';
-
-            return `
-              <div class="google-item-card" onclick="App.applyGoogleBook('${encodeURIComponent(JSON.stringify({ title, author, pages, cover, genre }))}')">
-                ${cover ? `<img src="${cover}" style="width: 32px; height: 48px; object-fit: cover; border-radius: 3px;">` : '📖'}
-                <div style="font-size: 12px; line-height: 1.3;">
-                  <strong>${UIRenderer.escapeHtml(title)}</strong><br>
-                  <span style="color: var(--text-muted);">${UIRenderer.escapeHtml(author)} (${pages} pp)</span>
-                </div>
+          const { results, source } = await BookLookupService.searchBooks(query, AppState.lookupEbooksOnly);
+          AppState.lastGoogleSearchResults = results;
+          UIRenderer.renderGoogleResults(results, source, query);
+        } catch (err) {
+          if (container) {
+            container.innerHTML = `
+              <div style="padding: 16px; font-size: 13px; color: var(--text-muted); text-align: center;">
+                Could not retrieve search results due to a network connection issue.<br>
+                <span style="font-size: 12px; margin-top: 4px; display: inline-block;">You can enter details manually in the form below.</span>
               </div>
             `;
-          }).join('');
-        } catch (err) {
-          container.innerHTML = `<div style="padding: 12px; font-size: 13px; color: var(--text-muted);">Could not reach Google Books API. Please enter details manually.</div>`;
+          }
+        } finally {
+          if (searchBtn) searchBtn.disabled = false;
         }
       },
 
-      applyGoogleBook(encodedJson) {
-        const data = JSON.parse(decodeURIComponent(encodedJson));
-        document.getElementById('bookFormTitle').value = data.title;
-        document.getElementById('bookFormAuthor').value = data.author;
-        document.getElementById('bookFormPages').value = data.pages;
-        if (data.cover) document.getElementById('bookFormCoverUrl').value = data.cover;
+      applyGoogleBookByIndex(index) {
+        const book = (AppState.lastGoogleSearchResults || [])[index];
+        if (!book) return;
+
+        document.getElementById('bookFormTitle').value = book.title || '';
+        document.getElementById('bookFormAuthor').value = book.author || '';
+        document.getElementById('bookFormPages').value = book.pages || 300;
+        document.getElementById('bookFormCurrentPage').value = 0;
+        
+        // Format
+        const formatSelect = document.getElementById('bookFormFormat');
+        if (formatSelect) {
+          formatSelect.value = book.isEbook ? 'eBook' : (book.format || 'Paperback');
+        }
+
+        // Genre
+        const genreSelect = document.getElementById('bookFormGenre');
+        if (genreSelect && book.genre) {
+          genreSelect.value = book.genre;
+        }
+
+        // Rating
+        const ratingSelect = document.getElementById('bookFormRating');
+        if (ratingSelect && book.rating) {
+          const rounded = Math.min(5, Math.max(1, Math.round(book.rating * 2) / 2));
+          ratingSelect.value = String(rounded);
+        }
+
+        // Series
+        if (book.series) {
+          document.getElementById('bookFormSeries').value = book.series;
+          if (book.seriesNo) {
+            document.getElementById('bookFormSeriesNo').value = book.seriesNo;
+          }
+        }
+
+        // Cover URL
+        if (book.cover) {
+          document.getElementById('bookFormCoverUrl').value = book.cover;
+        }
+
+        // Notes / Summary
+        if (book.description) {
+          const cleanDesc = book.description.replace(/<[^>]*>?/gm, '').trim();
+          document.getElementById('bookFormNotes').value = cleanDesc.length > 500 ? cleanDesc.slice(0, 497) + '...' : cleanDesc;
+        }
+
+        // eBook URL hidden field
+        const ebookInput = document.getElementById('bookFormEbookUrl');
+        if (ebookInput) {
+          ebookInput.value = book.ebookUrl || book.previewLink || '';
+        }
+
         document.getElementById('googleResultsContainer').style.display = 'none';
-        this.showToast(`Applied details for "${data.title}"`, 'info');
+        this.showToast(`Applied ${book.isEbook ? 'Google eBook' : 'book'} details for "${book.title}"! 📖`, 'success');
+      },
+
+      quickChipSearch(title) {
+        const input = document.getElementById('googleSearchInput');
+        if (input) {
+          input.value = title;
+          this.searchGoogleBooks();
+        }
+      },
+
+      clearGoogleSearch() {
+        const input = document.getElementById('googleSearchInput');
+        if (input) input.value = '';
+        const container = document.getElementById('googleResultsContainer');
+        if (container) {
+          container.style.display = 'none';
+          container.innerHTML = '';
+        }
+        const clearBtn = document.getElementById('googleClearSearchBtn');
+        if (clearBtn) clearBtn.style.display = 'none';
+      },
+
+      applyGoogleBook(encodedJson) {
+        try {
+          const data = JSON.parse(decodeURIComponent(encodedJson));
+          document.getElementById('bookFormTitle').value = data.title || '';
+          document.getElementById('bookFormAuthor').value = data.author || '';
+          document.getElementById('bookFormPages').value = data.pages || 300;
+          if (data.cover) document.getElementById('bookFormCoverUrl').value = data.cover;
+          if (data.genre) document.getElementById('bookFormGenre').value = data.genre;
+          if (data.isEbook) document.getElementById('bookFormFormat').value = 'eBook';
+          document.getElementById('googleResultsContainer').style.display = 'none';
+          this.showToast(`Applied details for "${data.title}"`, 'info');
+        } catch (e) {
+          console.error('applyGoogleBook error:', e);
+        }
       },
 
       exportJsonBackup() {
