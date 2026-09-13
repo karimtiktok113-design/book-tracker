@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Next Read — Book Tracker & Digital Reading Journal</title>
+  <title>BookNest — Book Tracker & Digital Reading Journal</title>
   <meta name="description" content="Good Books. Brighter Days. A beautiful personal digital library, reading tracker, and digital reading journal.">
   <meta name="theme-color" content="#FAF7F2">
 
@@ -4142,7 +4142,7 @@
           </svg>
         </div>
         <div class="brand-text">
-          <h1>Next Read</h1>
+          <h1>BookNest</h1>
           <p>Book Tracker & Journal</p>
         </div>
         <button class="drawer-close-btn" id="closeSidebarDrawerBtn" aria-label="Close Navigation Menu" title="Close Menu" type="button">
@@ -4933,7 +4933,7 @@
           <!-- Restore JSON Backup -->
           <div class="card-panel">
             <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">Restore from JSON</h4>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Restore your data from a previous Next Read backup file.</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Restore your data from a previous BookNest backup file.</p>
             <input type="file" id="restoreFileInput" accept=".json" style="display: none;">
             <button class="btn-secondary" onclick="document.getElementById('restoreFileInput').click()">Select JSON File</button>
           </div>
@@ -5023,7 +5023,7 @@
         <!-- Optional AI & Cloud Architecture Configuration (No hardcoded keys) -->
         <div class="card-panel" style="margin-bottom: 24px;">
           <h4 style="font-size: 17px; font-weight: 700; font-family: var(--font-serif); margin-bottom: 10px;">Integrations & Optional AI Proxy</h4>
-          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Next Read operates 100% locally in your browser. You can optionally link a secure backend proxy or cloud sync endpoint.</p>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">BookNest operates 100% locally in your browser. You can optionally link a secure backend proxy or cloud sync endpoint.</p>
           <div class="form-group" style="margin-bottom: 12px;">
             <label for="settingsAiProxyUrl">AI Proxy Endpoint (Optional)</label>
             <input type="url" class="form-input" id="settingsAiProxyUrl" placeholder="https://api.yourdomain.com/v1/reading-assistant">
@@ -5038,7 +5038,7 @@
 
         <!-- About WebCraft Goods -->
         <div class="card-panel">
-          <h4 style="font-size: 17px; font-weight: 700; font-family: var(--font-serif); margin-bottom: 6px;">Next Read</h4>
+          <h4 style="font-size: 17px; font-weight: 700; font-family: var(--font-serif); margin-bottom: 6px;">BookNest</h4>
           <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Tagline: <em>Good Books. Brighter Days.</em> • Created by WebCraft Goods • Version 2.4.0</p>
           <p style="font-size: 13px; color: var(--text-muted);">Crafted for book lovers who cherish quiet reading mornings and thoughtful digital spaces.</p>
         </div>
@@ -5947,7 +5947,7 @@
        2. CENTRAL STORAGE SERVICE (IndexedDB with LocalStorage Fallback)
        -------------------------------------------------------------------------- */
     const StorageService = {
-      dbName: 'NextReadDB_v2',
+      dbName: 'BookNestDB_v2',
       dbVersion: 1,
       db: null,
 
@@ -5979,12 +5979,12 @@
       },
 
       async loadAll() {
-        const storedBooks = localStorage.getItem('nextread_books');
-        const storedQuotes = localStorage.getItem('nextread_quotes');
-        const storedJournal = localStorage.getItem('nextread_journal');
-        const storedSessions = localStorage.getItem('nextread_sessions');
-        const storedSeries = localStorage.getItem('nextread_series');
-        const storedSettings = localStorage.getItem('nextread_settings');
+        const storedBooks = localStorage.getItem('booknest_books') || localStorage.getItem('nextread_books');
+        const storedQuotes = localStorage.getItem('booknest_quotes') || localStorage.getItem('nextread_quotes');
+        const storedJournal = localStorage.getItem('booknest_journal') || localStorage.getItem('nextread_journal');
+        const storedSessions = localStorage.getItem('booknest_sessions') || localStorage.getItem('nextread_sessions');
+        const storedSeries = localStorage.getItem('booknest_series') || localStorage.getItem('nextread_series');
+        const storedSettings = localStorage.getItem('booknest_settings') || localStorage.getItem('nextread_settings');
 
         return {
           books: storedBooks ? JSON.parse(storedBooks) : INITIAL_DEMO_BOOKS,
@@ -6005,7 +6005,7 @@
 
       save(key, data) {
         try {
-          localStorage.setItem(`nextread_${key}`, JSON.stringify(data));
+          localStorage.setItem(`booknest_${key}`, JSON.stringify(data));
         } catch (err) {
           console.error('Storage save error:', err);
         }
@@ -7122,7 +7122,7 @@
               <div class="cover-fallback-title">${this.escapeHtml(title)}</div>
               <div class="cover-fallback-author">${this.escapeHtml(author)}</div>
             </div>
-            <div style="font-size: 9px; opacity: 0.5;">NEXT READ</div>
+            <div style="font-size: 9px; opacity: 0.5;">BOOKNEST</div>
           </div>
         `;
       },
@@ -9909,7 +9909,7 @@
         const a = document.createElement('a');
         const dateStr = new Date().toISOString().split('T')[0];
         a.href = url;
-        a.download = `NextRead_Backup_${dateStr}.json`;
+        a.download = `BookNest_Backup_${dateStr}.json`;
         a.click();
         URL.revokeObjectURL(url);
         this.showToast('Backup JSON downloaded successfully!', 'success');
@@ -9924,7 +9924,7 @@
           try {
             const data = JSON.parse(event.target.result);
             if (!data.books || !Array.isArray(data.books)) {
-              alert('Invalid Next Read backup file.');
+              alert('Invalid BookNest backup file.');
               return;
             }
             if (confirm(`Restore ${data.books.length} books and all journal data? This will replace current data.`)) {
@@ -10054,7 +10054,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `NextRead_Books_${new Date().toISOString().split('T')[0]}.csv`;
+        a.download = `BookNest_Books_${new Date().toISOString().split('T')[0]}.csv`;
         a.click();
         URL.revokeObjectURL(url);
         this.showToast('Books exported as CSV spreadsheet!', 'success');
